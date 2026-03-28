@@ -10,6 +10,7 @@ import pssLogo from "@/assets/pss-logo.png";
 import academyTeachingVideo1 from "@/assets/ACADEMY AWARDS/WhatsApp Video 2026-03-26 at 12.49.59 PM.mp4";
 import academyTeachingVideo2 from "@/assets/ACADEMY AWARDS/WhatsApp Video 2026-03-26 at 12.49.59 PM (1).mp4";
 import academyTeachingVideo3 from "@/assets/ACADEMY AWARDS/WhatsApp Video 2026-03-26 at 12.49.59 PM (2).mp4";
+import academyTeachingVideo4 from "@/assets/ACADEMY AWARDS/WhatsApp Video 2026-03-28 at 9.19.54 AM.mp4";
 import {
   professionalMakeupHairArtistCourse,
   academyBestFor,
@@ -28,6 +29,7 @@ const academyTeachingVideos = [
   { src: academyTeachingVideo1, title: "Founder teaching session 1" },
   { src: academyTeachingVideo2, title: "Founder teaching session 2" },
   { src: academyTeachingVideo3, title: "Founder teaching session 3" },
+  { src: academyTeachingVideo4, title: "Srimathi N teaching live in academy class" },
 ] as const;
 
 const academyProofMetrics = [
@@ -97,6 +99,7 @@ const excludedCertificationVideoNames = new Set([
   "WhatsApp Video 2026-03-26 at 12.49.59 PM (1).mp4",
   "WhatsApp Video 2026-03-26 at 12.49.59 PM (2).mp4",
   "WhatsApp Video 2026-03-26 at 12.49.59 PM.mp4",
+  "WhatsApp Video 2026-03-28 at 9.19.54 AM.mp4",
 ]);
 
 const academyCertificationVideosFiltered = academyCertificationVideos.filter(({ path }) => {
@@ -471,7 +474,7 @@ const AcademyPage = () => {
               </p>
             </motion.div>
 
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-4 lg:grid-cols-4">
               {academyTeachingVideos.map((video, i) => (
                 <motion.div
                   key={video.src}
