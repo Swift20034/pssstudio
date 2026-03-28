@@ -178,7 +178,7 @@ const HeroSection = () => {
                     alt={card.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/45 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
                   <div className="hero-card-shine" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <h3 className="font-display text-xl text-gradient-gold mb-1 transition-transform duration-500 group-hover:translate-y-[-1px]">{card.title}</h3>
