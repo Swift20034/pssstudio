@@ -4,10 +4,16 @@ import { MessageCircleHeart, Star } from "lucide-react";
 import testimonialVideo from "@/assets/testimonials/WhatsApp Video 2026-03-26 at 11.06.19 AM.mp4";
 
 const testimonials = [
-  { name: "Priya Sharma", role: "Bride", text: "PSS made my wedding day absolutely magical. The attention to detail was beyond anything I imagined. Every guest complimented my look!" },
-  { name: "Ananya Reddy", role: "Makeup Artist", text: "PSS turned my passion into a profession. The hands-on training and mentorship were world-class. I now run my own studio!" },
-  { name: "Meera Kapoor", role: "Celebrity Client", text: "I trust PSS for every red carpet event. Their artistry is unmatched — always elegant, always flawless, always making me feel like a queen." },
-  { name: "Kavya Nair", role: "Bride", text: "From the trial to the big day, the experience was luxury from start to finish. My bridal look was absolutely breathtaking." },
+  { name: "Kavya Kavyagowda", role: "Facial Service", rating: 5, text: "I am happy with the facial service 🥰 and the overall experience was great. Good manners and excellent results, thank you so much!" },
+  { name: "Kokila KV", role: "Professional Makeup", rating: 5, text: "Really very nice makeup 💄 and definitely worth it 💅. The artistry was exceptional!" },
+  { name: "Tanu", role: "Pedicure Experience", rating: 5, text: "I had an amazing experience with my pedicure! The service was truly top-notch — professional, relaxing, and detail-oriented. My feet feel so refreshed!" },
+  { name: "Ruksar Rahi", role: "Salon Experience", rating: 5, text: "The service was very good and the salon is very clean. Easy to find and they use branded products, the results are amazing. Worth coming here!" },
+  { name: "Chinne Aana", role: "Hydro Facial", rating: 5, text: "I am very happy with the hydro facial results. They use high-quality products and handle customers in a very professional manner. 100% recommended! 🙏🥰" },
+  { name: "Vanaja Lakshmi", role: "Legacy Client", rating: 5, text: "Customer from 6 years almost. She has good knowledge in this field and is well experienced. Always gives honest suggestions and very friendly." },
+  { name: "Manasa Manu", role: "Beauty Services", rating: 5, text: "One stop for all beauty services. They are very friendly to new customers and I personally recommend visiting PSS. You will definitely get good results ✨" },
+  { name: "Pooja HS", role: "Studio Visit", rating: 5, text: "I visited the parlour and had a great service by the staff. I really liked the experience and highly recommend their professional touch 😍" },
+  { name: "Chanduanu", role: "Academy Student", rating: 5, text: "I completed my training at this academy. Great teacher and very helpful teaching style. Thank you so much madam! 🥰" },
+  { name: "Sudha Amul Raj", role: "Hair Layer Cut", rating: 5, text: "I'm so happy with my hair layer cut! Thank you so much for the amazing transformation. 🥰😍" },
 ];
 
 const TestimonialsSection = () => {
@@ -70,13 +76,17 @@ const TestimonialsSection = () => {
                   active === i ? "relative" : "pointer-events-none absolute inset-0"
                 }`}
               >
-                <div className="mb-6 font-display text-4xl text-gradient-gold">"</div>
-                <p className="mx-auto mb-8 max-w-2xl hyphens-auto text-justify font-body text-xl leading-relaxed text-foreground/80 md:text-2xl">
+                <div className="mb-4 flex justify-center gap-1">
+                  {[...Array(t.rating)].map((_, starIndex) => (
+                    <Star key={starIndex} className="h-4 w-4 fill-primary text-primary" />
+                  ))}
+                </div>
+                <div className="mb-4 font-display text-4xl text-gradient-gold leading-none">"</div>
+                <p className="mx-auto mb-6 max-w-2xl hyphens-auto text-justify font-body text-xl leading-relaxed text-foreground/80 md:text-2xl">
                   {t.text}
                 </p>
                 <div className="font-display text-lg text-gradient-gold">{t.name}</div>
-                <div className="mt-1 inline-flex items-center gap-1.5 font-sans-serif text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  <Star className="h-3.5 w-3.5 text-primary/80" aria-hidden />
+                <div className="mt-1 font-sans-serif text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">
                   {t.role}
                 </div>
               </motion.div>

@@ -13,7 +13,8 @@ const SECTION_BY_LABEL: Record<string, string> = {
   Portfolio: "portfolio",
   Testimonials: "testimonials",
   "Book Now": "book-now",
-  Contact: "book-now",
+  Contact: "location",
+  Location: "location",
 };
 
 /** Navbar / footer: scroll on home, or navigate to `/#section` from other routes. Academy opens `/academy`. */

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import pssLogo from "@/assets/pss-logo.png";
 import { goToNavLabel } from "@/lib/siteNav";
 
-const navItems = ["About", "Services", "Summer Offers", "Academy", "Portfolio", "Testimonials", "Book Now"];
+const navItems = ["About", "Services", "Summer Offers", "Academy", "Portfolio", "Testimonials", "Location", "Book Now"];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);

@@ -24,8 +24,9 @@ const Footer = () => {
         <div className="flex flex-col items-center text-center">
           <img src={pssLogo} alt="PSS" className="mb-6 h-24 w-24 rounded-full md:h-28 md:w-28" />
           <h3 className="font-display text-xl text-gradient-gold mb-2">PSS Makeup Studio</h3>
-          <p className="font-sans-serif text-xs tracking-[0.2em] uppercase text-muted-foreground mb-6">
-            Salon · KR Puram, Bangalore
+          <p className="font-sans-serif text-[10px] tracking-[0.15em] uppercase text-muted-foreground/80 mb-6 max-w-sm mx-auto leading-relaxed">
+            1st Floor, Gowri Books Store, Devasandra Main Rd, <br />
+            KR Puram, Bangalore - 560036
           </p>
 
           <div className="flex flex-wrap justify-center gap-6 mb-8">
