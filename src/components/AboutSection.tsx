@@ -10,10 +10,9 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="py-16 md:py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,hsl(329_92%_54%/0.03)_0%,transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,hsl(43_100%_50%/0.03)_0%,transparent_50%)]" />
       <div className="container mx-auto px-6" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-          {/* Image */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -33,12 +32,10 @@ const AboutSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
               <div className="hero-card-shine" />
             </div>
-            {/* Floating decoration */}
             <div className="absolute -bottom-6 -right-6 w-32 h-32 border border-primary/20 rounded-lg animate-glow-pulse" />
             <div className="absolute -top-6 -left-6 w-24 h-24 border border-primary/10 rounded-full" />
           </motion.div>
 
-          {/* Text */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -55,26 +52,33 @@ const AboutSection = () => {
             </h2>
             <div className="space-y-4 font-body text-lg text-foreground/70 leading-relaxed text-justify hyphens-auto">
               <p>
-                PSS Makeup Studio is more than a beauty destination — it's where artistry meets excellence.
-                Founded by <span className="text-foreground/90">Srimathi N</span> with a passion for transforming
-                beauty into unforgettable experiences, we've become a trusted name in bridal, editorial, and
-                high-fashion makeup.
+                Founded by <span className="text-foreground/90 font-medium">Srimathi N</span>—a Master Trainer for Labournet 
+                specializing in career advancement since 2009. 
+                With a legacy of excellence, she has personally trained over 
+                <span className="text-foreground font-semibold"> 3500+ members </span> 
+                in beauty and wellness through prestigious CSR projects.
               </p>
               <p>
-                We invest in continuous training and premium products so every visit feels elevated—from subtle day looks to full
-                bridal transformations.
+                Our expertise has been recognized and sponsored by global leaders including
+                <span className="text-primary/90"> L&T, JP Morgan</span>, and the
+                <span className="text-primary/90"> Godrej Project</span> through their 
+                entrepreneurship programs, alongside the
+                <span className="text-primary/90"> SKF Foundation</span>.
               </p>
             </div>
-            <div className="mt-8 flex w-full max-w-xl justify-between gap-4 sm:gap-8">
+            
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-6">
               {[
-                { num: "500+", label: "Happy Brides", Icon: Sparkles },
-                { num: "15+", label: "Services", Icon: Scissors },
-                { num: "10+", label: "Years", Icon: Trophy },
+                { num: "3500+", label: "Members Trained", Icon: Trophy },
+                { num: "1000+", label: "Bridal Projects", Icon: Sparkles },
+                { num: "Since", label: "2009", Icon: Trophy },
+                { num: "1000+", label: "Happy Clients", Icon: HeartHandshake },
+                { num: "15+", label: "Expert Services", Icon: Scissors },
               ].map((stat) => (
-                <div key={stat.label}>
+                <div key={stat.label} className="text-center md:text-left">
                   <stat.Icon className="mx-auto mb-2 h-4 w-4 text-primary md:mx-0" aria-hidden />
-                  <div className="text-3xl font-display text-gradient-gold">{stat.num}</div>
-                  <div className="font-sans-serif text-xs tracking-[0.15em] uppercase text-muted-foreground mt-1">{stat.label}</div>
+                  <div className="text-2xl font-display text-gradient-gold">{stat.num}</div>
+                  <div className="font-sans-serif text-[10px] tracking-[0.14em] uppercase text-muted-foreground mt-1">{stat.label}</div>
                 </div>
               ))}
             </div>

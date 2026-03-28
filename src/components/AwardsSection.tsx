@@ -15,12 +15,9 @@ const awardVideoModules = import.meta.glob<string>("../assets/awards/*.{mp4,webm
 
 type AwardMedia = { path: string; src: string; kind: "image" | "video" };
 
-/** Spotlight clip shown first with hero treatment in the Awards grid */
 const FEATURED_AWARD_VIDEO_FILE = "WhatsApp Video 2026-03-26 at 2.38.00 PM.mp4";
-/** Additional reel-style award clips to keep in vertical aspect. */
 const REEL_AWARD_VIDEO_FILE_1 = "WhatsApp Video 2026-03-26 at 1.41.22 P.mp4";
 const REEL_AWARD_VIDEO_FILE_2 = "WhatsApp Video 2026-03-26 at 1.41.22 PM.mp4";
-/** Keep this image closer to its native resolution/aspect. */
 const ORIGINAL_RESOLUTION_AWARD_IMAGE_FILE = "WhatsApp Image 2026-03-26 at 2.39.39 PM.jpeg";
 
 function fileNameFromGlobPath(path: string): string {
@@ -75,7 +72,7 @@ const AwardsSection = () => {
 
   return (
     <section id="awards" className="relative overflow-hidden py-16 md:py-20">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(329_92%_54%/_0.06),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(43_100%_50%/0.04)_0%,transparent_60%)]" />
       <div className="container relative mx-auto px-6" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}

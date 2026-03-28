@@ -6,8 +6,10 @@ import { filterHairPathsForPortfolio, orderHairPaths } from "@/lib/hairAssetOrde
 import { orderMythologyPaths } from "@/lib/mythologyAssetOrder";
 import studioPhoto from "@/assets/about-studio.jpeg";
 import testimonialShowcaseVideo from "@/assets/testimonials/WhatsApp Video 2026-03-26 at 12.49.50 PM.mp4";
+import hdAirbrushVideo from "@/assets/eyes/WhatsApp Video 2026-03-28 at 2.09.50 PM.mp4";
+import hdAirbrushVideo2 from "@/assets/eyes/WhatsApp Video 2026-03-28 at 3.06.56 PM.mp4";
+import hdAirbrushVideo3 from "@/assets/eyes/WhatsApp Video 2026-03-28 at 3.06.57 PM.mp4";
 
-/** Replace with your studio WhatsApp (country code + number, no + or spaces). */
 const WHATSAPP_NUMBER = "919686373707";
 
 type PortfolioCategoryId =
@@ -18,7 +20,8 @@ type PortfolioCategoryId =
   | "hd-airbrush"
   | "hair"
   | "heel-treatment"
-  | "hydra-facial";
+  | "hydra-facial"
+  | "saree-box-folding";
 
 type PortfolioItem = {
   id: string;
@@ -37,6 +40,7 @@ const CATEGORIES: { id: PortfolioCategoryId; label: string }[] = [
   { id: "hair", label: "Hair Styling" },
   { id: "heel-treatment", label: "Heel Treatment" },
   { id: "hydra-facial", label: "Hydra Facial" },
+  { id: "saree-box-folding", label: "Saree Box Folding" },
 ];
 
 const bridalModules = import.meta.glob<string>("../assets/bridal makeup/*.{jpeg,jpg,png,webp}", {
@@ -79,12 +83,16 @@ const nailArtModules = import.meta.glob<string>("../assets/nail art/*.{jpeg,jpg,
   import: "default",
 });
 
+const sareeFoldingModules = import.meta.glob<string>("../assets/saree box folding/*.{jpeg,jpg,png,webp}", {
+  eager: true,
+  import: "default",
+});
+
 function categoryBadge(categoryId: PortfolioCategoryId): string {
   const c = CATEGORIES.find((x) => x.id === categoryId);
   return (c?.label ?? "").toUpperCase();
 }
 
-/** Party makeup shots stored under `assets/hair/party/` (same glob as hair; split by path). */
 function isHairPartyAssetPath(path: string): boolean {
   return path.replace(/\\/g, "/").toLowerCase().includes("/hair/party/");
 }
@@ -165,6 +173,14 @@ function buildAllPortfolioItems(): PortfolioItem[] {
   }));
   const fromPartyGlob: PortfolioItem[] = [...fromPartyRoot, ...fromPartyHairFolder];
 
+  const sareeFoldingPaths = Object.keys(sareeFoldingModules).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+  const fromSareeFoldingGlob: PortfolioItem[] = sareeFoldingPaths.map((path, index) => ({
+    id: `saree-folding-glob-${index}-${path}`,
+    src: sareeFoldingModules[path],
+    title: `Saree folding ${index + 1}`,
+    categoryId: "saree-box-folding" as const,
+  }));
+
   const extra: PortfolioItem[] = [
     { id: "extra-p1", src: studioPhoto, title: "Bridal Collection", categoryId: "bridal" },
     {
@@ -172,6 +188,27 @@ function buildAllPortfolioItems(): PortfolioItem[] {
       src: testimonialShowcaseVideo,
       title: "Client testimonial video",
       categoryId: "bridal",
+      mediaType: "video",
+    },
+    {
+      id: "extra-hd-airbrush-video",
+      src: hdAirbrushVideo,
+      title: "HD Airbrush transformation",
+      categoryId: "hd-airbrush",
+      mediaType: "video",
+    },
+    {
+      id: "extra-hd-airbrush-video-2",
+      src: hdAirbrushVideo2,
+      title: "Airbrush bridal finish",
+      categoryId: "hd-airbrush",
+      mediaType: "video",
+    },
+    {
+      id: "extra-hd-airbrush-video-3",
+      src: hdAirbrushVideo3,
+      title: "Pro HD makeover",
+      categoryId: "hd-airbrush",
       mediaType: "video",
     },
   ];
@@ -185,11 +222,11 @@ function buildAllPortfolioItems(): PortfolioItem[] {
     ...fromHydraGlob,
     ...fromEyesGlob,
     ...fromPartyGlob,
+    ...fromSareeFoldingGlob,
     ...extra,
   ];
 }
 
-/** Tailwind `md` (tablet/desktop): show 8 tiles before expand; below = mobile, show 4. */
 const MOBILE_MAX_WIDTH_QUERY = "(max-width: 767px)";
 
 function subscribeMobileViewport(callback: () => void) {
@@ -271,7 +308,6 @@ const PortfolioSection = () => {
           </p>
         </motion.div>
 
-        {/* Category pills — layout like reference; colors from your theme */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -381,7 +417,6 @@ const PortfolioSection = () => {
         </LayoutGroup>
       </div>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {lightboxItem && (
           <motion.div
@@ -423,7 +458,6 @@ const PortfolioSection = () => {
         )}
       </AnimatePresence>
 
-      {/* WhatsApp FAB — icon uses brand green for recognition */}
       <a
         href={waHref}
         target="_blank"

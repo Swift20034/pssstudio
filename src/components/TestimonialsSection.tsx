@@ -28,7 +28,7 @@ const TestimonialsSection = () => {
 
   return (
     <section id="testimonials" className="py-16 md:py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(329_92%_54%/0.03)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(43_100%_50%/0.03)_0%,transparent_60%)]" />
       <div className="container mx-auto max-w-6xl px-6" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}

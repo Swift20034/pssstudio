@@ -149,6 +149,11 @@ export const serviceCategories: ServiceCategory[] = [
     items: ["Micro blading eyebrows", "Permanent lipstick", "Permanent Kajal"],
   },
   {
+    id: "saree-box-folding",
+    title: "Saree Box Folding",
+    items: ["Professional Saree Box Folding", "Heavy Saree Folding", "GIFT Wrapping / Box Folding"],
+  },
+  {
     id: "skin-clinical",
     title: "Skin Treatments (Clinical)",
     items: [
@@ -300,6 +305,10 @@ export const bookingServiceGroups: { label: string; options: string[] }[] = [
   {
     label: "Permanent Beauty Services",
     options: ["Micro blading eyebrows", "Permanent lipstick", "Permanent Kajal"],
+  },
+  {
+    label: "Saree Box Folding",
+    options: ["Professional Saree Box Folding", "Heavy Saree Folding", "GIFT Wrapping / Box Folding"],
   },
   {
     label: "Skin Treatments (Clinical)",

@@ -26,8 +26,8 @@ const SummerOffersSection = () => {
       id="summer-offers"
       className="relative overflow-hidden py-16 md:py-20"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,hsl(329_92%_54%/_0.12),transparent_55%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_100%_50%,hsl(330_70%_70%/_0.06),transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,hsl(43_100%_50%/_0.12),transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_100%_50%,hsl(43_100%_50%/_0.06),transparent_50%)]" />
 
       <div className="container relative mx-auto px-6" ref={ref}>
         <motion.div
@@ -111,7 +111,6 @@ const SummerOffersSection = () => {
                     transition={{ delay: 0.04 * i, duration: 0.35 }}
                     className="h-full min-h-0 list-none"
                   >
-                    {/* Inner card handles hover — Framer sets inline transform on motion.li, which would override CSS :hover on the same node */}
                     <div className="summer-offer-container flex h-full flex-col rounded-2xl border border-primary/25 bg-card/40 p-5 luxury-shadow backdrop-blur-sm">
                       <div className="mb-3 flex items-start justify-between gap-2 border-b border-border/30 pb-3">
                         <span className="inline-flex items-center gap-2 font-display text-lg text-gradient-gold">
@@ -178,7 +177,7 @@ const SummerOffersSection = () => {
                       >
                         <span className="flex max-w-[75%] items-start gap-3 font-body text-sm text-foreground/90 md:text-base">
                           <span
-                            className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-primary shadow-[0_0_8px_hsl(329_92%_54%/_0.45)]"
+                            className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-primary shadow-[0_0_8px_hsl(43_100%_50%/_0.45)]"
                             aria-hidden
                           />
                           {row.label}

@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import pssLogo from "@/assets/pss-logo.png";
+import mainLogo from "@/assets/logo.png";
 import { goToNavLabel } from "@/lib/siteNav";
 
 const socials = [
@@ -30,7 +31,11 @@ const Footer = () => {
     <footer className="py-10 md:py-12 border-t border-border/30">
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center text-center">
-          <img src={pssLogo} alt="PSS" className="mb-6 h-24 w-24 rounded-full md:h-28 md:w-28" />
+          <div className="flex items-center gap-6 mb-8 group">
+            <img src={mainLogo} alt="PSS Studio" className="h-20 w-20 rounded-full md:h-24 md:w-24 border-2 border-primary/20 gold-glow transition-transform group-hover:scale-105" />
+            <div className="h-12 w-px bg-primary/20" />
+            <img src={pssLogo} alt="Pearl Bright" className="h-16 w-32 object-contain opacity-80 hover:opacity-100 transition-opacity" />
+          </div>
           <h3 className="font-display text-xl text-gradient-gold mb-2">PSS Makeup Studio</h3>
           <p className="font-sans-serif text-[10px] tracking-[0.15em] uppercase text-muted-foreground/80 mb-6 max-w-sm mx-auto leading-relaxed">
             1st Floor, Gowri Books Store, Devasandra Main Rd, <br />

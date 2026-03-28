@@ -32,7 +32,7 @@ const GoldParticles = () => {
             bottom: "-10px",
             width: `${p.size}px`,
             height: `${p.size}px`,
-            background: `radial-gradient(circle, hsl(329 92% 54% / ${p.opacity}), transparent)`,
+            background: `radial-gradient(circle, hsl(43 100% 50% / ${p.opacity}), transparent)`,
             animationDelay: `${p.delay}s`,
             animationDuration: `${p.duration}s`,
           }}

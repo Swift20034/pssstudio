@@ -50,7 +50,7 @@ const BookingSection = () => {
 
   return (
     <section id="book-now" className="py-16 md:py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,hsl(329_92%_54%/0.04)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,hsl(43_100%_50%/0.04)_0%,transparent_60%)]" />
       <div className="container mx-auto px-6 max-w-2xl" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

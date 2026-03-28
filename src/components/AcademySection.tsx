@@ -19,7 +19,7 @@ const AcademySection = () => {
 
   return (
     <section id="academy" className="relative overflow-hidden py-16 md:py-20">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_right,hsl(329_92%_54%/_0.05),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_right,hsl(43_100%_50%/_0.05),transparent_60%)]" />
       <div className="container relative mx-auto px-6" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BookOpenCheck, CalendarCheck2, Sparkles } from "lucide-react";
 import pssLogo from "@/assets/pss-logo.png";
+import mainLogo from "@/assets/logo.png";
 import studioFallback from "@/assets/about-studio.jpeg";
 import heroEyesImage from "@/assets/eyes/WhatsApp Image 2026-03-26 at 12.08.24 PM (3).jpeg";
 import heroBridalImage from "@/assets/bridal makeup/WhatsApp Image 2026-03-26 at 11.28.31 AM.jpeg";
@@ -28,7 +29,6 @@ const hydraFacialPaths = Object.keys(hydraFacialModules).sort((a, b) => a.locale
 const hydraFacialHeroImage =
   hydraFacialPaths.length > 0 ? hydraFacialModules[hydraFacialPaths[0]]! : studioFallback;
 
-/** Nested `hair/**` for build; hero prefers pinned basenames, then sorted (excludes `hair/party/`). */
 const hairPortfolioModules = import.meta.glob<string>("../assets/hair/**/*.{jpeg,jpg,png,webp}", {
   eager: true,
   import: "default",
@@ -51,7 +51,6 @@ const mythologyPaths = orderMythologyPaths(Object.keys(mythologyModules));
 const mythologyHeroImage =
   mythologyPaths.length > 0 ? mythologyModules[mythologyPaths[0]]! : studioFallback;
 
-/** Premium spotlight — aligned with flagship studio services */
 const cards = [
   { title: "Bridal Makeup", subtitle: "Sculpted, luminous looks for your celebration", image: bridalHeroImage },
   { title: "Permanent Beauty", subtitle: "Precision microblading, permanent lipstick & kajal", image: heroEyesImage },
@@ -93,7 +92,6 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-[calc(5.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(6.5rem+env(safe-area-inset-top,0px))] pb-6 md:pb-8">
-      {/* Background */}
       <div className="absolute inset-0 bg-background" />
       <div className="absolute inset-0">
         {heroBackgroundImages.map((image, index) => (
@@ -108,28 +106,42 @@ const HeroSection = () => {
         ))}
       </div>
       <div className="absolute inset-0 bg-background/55" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(329_92%_54%/0.05)_0%,transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(43_100%_50%/0.05)_0%,transparent_70%)]" />
       <GoldParticles />
 
-      {/* Content */}
       <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center max-w-5xl">
-        {/* Logo — inset from top so it clears fixed navbar */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="mb-5 md:mb-6"
         >
-          <div className="relative mx-auto w-[210px] sm:w-[240px] md:w-[280px]">
-            <img
-              src={pssLogo}
-              alt="PSS Makeup Studio"
-              className="relative z-10 h-auto w-full object-contain"
-            />
+          <div className="relative mx-auto flex items-center justify-center gap-6 md:gap-8">
+            <div className="relative w-[110px] sm:w-[130px] md:w-[150px]">
+              <img
+                src={mainLogo}
+                alt="PSS Makeup Studio"
+                className="relative z-10 h-auto w-full object-contain rounded-full border border-primary/20 gold-glow-strong"
+              />
+            </div>
+            
+            <div className="h-12 w-[1px] bg-primary/20" />
+
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5 }}
+              className="w-[105px] md:w-[125px] opacity-75 hover:opacity-100 transition-opacity"
+            >
+              <img
+                src={pssLogo}
+                alt="Pearl Bright Branding"
+                className="h-auto w-full object-contain"
+              />
+            </motion.div>
           </div>
         </motion.div>
 
-        {/* Tagline */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -150,7 +162,6 @@ const HeroSection = () => {
           Pearl Bright · KR Puram, Bangalore
         </motion.p>
 
-        {/* Reveal Cards */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: cardsRevealed ? 1 : 0, y: cardsRevealed ? 0 : 40 }}
@@ -185,7 +196,6 @@ const HeroSection = () => {
                     <p className="font-body text-sm text-foreground/70 transition-colors duration-500 group-hover:text-foreground/85">{card.subtitle}</p>
                   </div>
                 </div>
-                {/* Gold border on active */}
                 <div className={`absolute inset-0 rounded-lg border transition-all duration-500 ${
                   activeCard === i ? "border-primary/50" : "border-primary/10"
                 }`} />
@@ -194,7 +204,6 @@ const HeroSection = () => {
           ))}
         </motion.div>
 
-        {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -233,7 +242,6 @@ const HeroSection = () => {
           </div>
         </motion.div>
       </div>
-
     </section>
   );
 };

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import pssLogo from "@/assets/pss-logo.png";
+import mainLogo from "@/assets/logo.png";
 import { goToNavLabel } from "@/lib/siteNav";
 
 const navItems = ["About", "Services", "Summer Offers", "Academy", "Portfolio", "Testimonials", "Location", "Book Now"];
@@ -34,16 +35,21 @@ const Navbar = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-background/95 py-3 border-b border-primary/15 shadow-md shadow-primary/15 backdrop-blur-md"
-            : "bg-transparent py-5 md:py-6"
+            ? "bg-background/95 py-2 border-b border-primary/15 shadow-md shadow-primary/15 backdrop-blur-md"
+            : "bg-transparent py-3 md:py-4"
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <Link to="/" className="shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50" aria-label="PSS Makeup Studio home">
-            <img src={pssLogo} alt="" className="h-14 w-14 rounded-full md:h-[74px] md:w-[74px]" />
+          <Link to="/" className="shrink-0 focus-visible:outline-none flex items-center gap-2 group" aria-label="PSS Makeup Studio home">
+            <div className="relative flex items-center gap-2.5">
+              <img src={mainLogo} alt="" className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-contain border border-primary/20 gold-glow transition-transform group-hover:scale-105" />
+              <div className="h-6 w-[1px] bg-primary/20" />
+              <div className="w-16 sm:w-20 opacity-70 group-hover:opacity-100 transition-opacity">
+                <img src={pssLogo} alt="Pearl Bright Branding" className="h-auto w-full object-contain" />
+              </div>
+            </div>
           </Link>
 
-          {/* Mobile Academy Button */}
           <button
             type="button"
             onClick={() => onNavItem("Academy")}

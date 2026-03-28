@@ -4,9 +4,26 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+
+const ACADEMY_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Pearl Bright Academy by PSS",
+  "description": "Professional Makeup & Hair Styling Course since 2009. 4-week intensive transformation programs.",
+  "location": {
+    "@type": "Place",
+    "name": "Bangalore Studio",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bangalore"
+    }
+  }
+};
 import pearlBrightBanner from "@/assets/pearl-bright-academy-banner.png";
 import academyPromoImage from "@/assets/ACADEMY AWARDS/WhatsApp Image 2026-03-26 at 12.49.41 PM (2).jpeg";
 import pssLogo from "@/assets/pss-logo.png";
+import mainLogo from "@/assets/logo.png";
 import academyTeachingVideo1 from "@/assets/ACADEMY AWARDS/WhatsApp Video 2026-03-26 at 12.49.59 PM.mp4";
 import academyTeachingVideo2 from "@/assets/ACADEMY AWARDS/WhatsApp Video 2026-03-26 at 12.49.59 PM (1).mp4";
 import academyTeachingVideo3 from "@/assets/ACADEMY AWARDS/WhatsApp Video 2026-03-26 at 12.49.59 PM (2).mp4";
@@ -150,11 +167,16 @@ const AcademyPage = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
+      <SEO 
+        title="PSS Academy | Professional Makeup & Hair Styling Course in Bangalore"
+        description="Certified 4-week intensive professional makeup course in Bangalore. Learn celebrity-tier bridal & HD makeup from expert Srimathi N."
+        schema={ACADEMY_SCHEMA}
+      />
       <ScrollProgress />
       <Navbar />
       <main className="flex flex-col pt-[calc(5.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(6.5rem+env(safe-area-inset-top,0px))]">
         <section className="relative border-b border-border/20 py-10 md:py-14">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(329_92%_54%/0.09)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(43_100%_50%/0.09)_0%,transparent_60%)]" />
           <div className="container relative mx-auto px-6">
             <div className="mt-2 rounded-2xl border border-border/35 bg-card/40 p-5 md:p-6 transition-transform transition-shadow duration-200 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(0,0,0,0.45)]">
               <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
@@ -165,7 +187,7 @@ const AcademyPage = () => {
                 <h1 className="font-display text-3xl leading-tight text-balance md:text-5xl">
                   <span className="text-gradient-gold">Professional Makeup</span>
                   <br />
-                  <span className="text-foreground">&amp; Hair Artist Academy</span>
+                  <span className="text-foreground">& Academy Excellence</span>
                 </h1>
                 <p className="mt-4 max-w-2xl font-body text-sm leading-relaxed text-muted-foreground md:text-base">
                   Learn directly from working professionals at our Bangalore studio. This program is designed for
@@ -190,15 +212,20 @@ const AcademyPage = () => {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.06 }}
-                className="overflow-hidden rounded-2xl border border-primary/20 bg-card/35 luxury-shadow gold-glow-strong"
+                className="relative overflow-hidden rounded-2xl border border-primary/20 bg-card/35 luxury-shadow gold-glow-strong aspect-square flex items-center justify-center p-8 group"
               >
                 <img
-                  src={pssLogo}
-                  alt="PSS Makeup Studio logo"
-                  className="h-full w-full object-contain p-6 animate-pulse"
+                  src={mainLogo}
+                  alt="PSS Makeup Studio"
+                  className="relative z-10 h-full w-full object-contain rounded-full border-2 border-primary/10 transition-transform duration-500 group-hover:scale-105"
                   loading="eager"
-                  width={400}
-                  height={400}
+                />
+                <motion.img
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.6 }}
+                  src={pssLogo}
+                  alt="Pearl Bright"
+                  className="absolute bottom-4 right-4 h-12 w-auto object-contain z-20"
                 />
               </motion.div>
               </div>
@@ -235,7 +262,7 @@ const AcademyPage = () => {
         </section>
 
         <section className="relative border-b border-border/20 py-14 md:py-20">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(217_73%_47%/0.08)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(43_100%_50%/0.08)_0%,transparent_60%)]" />
           <div className="container relative mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -276,7 +303,7 @@ const AcademyPage = () => {
         </section>
 
         <section className="relative overflow-hidden border-b border-border/20 py-14 md:py-20">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_100%_0%,hsl(329_92%_54%/_0.07),transparent_55%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_100%_0%,hsl(43_100%_50%/_0.07),transparent_55%)]" />
           <div className="container relative mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -404,7 +431,7 @@ const AcademyPage = () => {
         </section>
 
         <section className="relative border-b border-border/20 py-14 md:py-20">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(329_92%_54%/0.05)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(43_100%_50%/0.05)_0%,transparent_60%)]" />
           <div className="container relative mx-auto px-6">
             <div className="grid items-start gap-8 lg:grid-cols-2">
               <motion.div
@@ -453,7 +480,7 @@ const AcademyPage = () => {
         </section>
 
         <section className="relative border-b border-border/20 py-14 md:py-20">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,hsl(329_92%_54%/0.05)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,hsl(43_100%_50%/0.05)_0%,transparent_60%)]" />
           <div className="container relative mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -499,7 +526,7 @@ const AcademyPage = () => {
 
         {academyCertifiedStudentImagesFiltered.length > 0 && (
           <section className="relative border-b border-border/20 py-14 md:py-20">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(329_92%_54%/0.05)_0%,transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(43_100%_50%/0.05)_0%,transparent_60%)]" />
             <div className="container relative mx-auto px-6">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
@@ -605,7 +632,7 @@ const AcademyPage = () => {
         )}
 
         <section className="relative border-b border-border/20 py-12 md:py-14">
-          <div className="absolute inset-0 bg-[linear-gradient(120deg,hsl(217_73%_47%/0.11)_0%,hsl(329_92%_54%/0.11)_55%,hsl(293_73%_52%/0.11)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,hsl(43_100%_50%/0.11)_0%,hsl(43_100%_30%/0.11)_55%,hsl(43_100%_20%/0.11)_100%)]" />
           <div className="container relative mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
