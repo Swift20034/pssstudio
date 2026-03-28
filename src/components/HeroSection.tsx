@@ -54,6 +54,7 @@ const mythologyHeroImage =
 /** Premium spotlight — aligned with flagship studio services */
 const cards = [
   { title: "Bridal Makeup", subtitle: "Sculpted, luminous looks for your celebration", image: bridalHeroImage },
+  { title: "Permanent Beauty", subtitle: "Precision microblading, permanent lipstick & kajal", image: heroEyesImage },
   { title: "Keratin & Botox", subtitle: "Smooth, repaired hair with pro-grade care", image: hairHeroImage },
   { title: "Hydra Facial", subtitle: "Deep hydration and clinic-level glow", image: hydraFacialHeroImage },
   { title: "Mythology Makeup", subtitle: "Iconic character looks for stage, film, and celebrations", image: mythologyHeroImage },
@@ -154,7 +155,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: cardsRevealed ? 1 : 0, y: cardsRevealed ? 0 : 40 }}
           transition={{ duration: 0.8 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10 w-full max-w-6xl"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 mb-8 md:mb-10 w-full max-w-7xl"
         >
           {cards.map((card, i) => (
             <motion.div

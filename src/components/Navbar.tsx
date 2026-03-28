@@ -39,17 +39,9 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <Link to="/" className="shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50" aria-label="PSS Makeup Studio home">
+           <Link to="/" className="shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50" aria-label="PSS Makeup Studio home">
             <img src={pssLogo} alt="" className="h-16 w-16 rounded-full md:h-[74px] md:w-[74px]" />
           </Link>
-
-          <button
-            type="button"
-            onClick={() => onNavItem("Academy")}
-            className="absolute left-1/2 -translate-x-1/2 lg:hidden rounded-full border border-primary/45 bg-primary/12 px-4 py-2 font-sans-serif text-[10px] tracking-[0.14em] uppercase text-primary gold-glow"
-          >
-            Academy
-          </button>
           
           <div className="hidden lg:flex items-center gap-8">
             {navItems.map((item) => (

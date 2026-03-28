@@ -78,11 +78,11 @@ const TestimonialsSection = () => {
               >
                 <div className="mb-4 flex justify-center gap-1">
                   {[...Array(t.rating)].map((_, starIndex) => (
-                    <Star key={starIndex} className="h-4 w-4 fill-primary text-primary" />
+                    <Star key={starIndex} className="h-4 w-4 fill-[#D4AF37] text-[#D4AF37]" />
                   ))}
                 </div>
                 <div className="mb-4 font-display text-4xl text-gradient-gold leading-none">"</div>
-                <p className="mx-auto mb-6 max-w-2xl hyphens-auto text-justify font-body text-xl leading-relaxed text-foreground/80 md:text-2xl">
+                <p className="mx-auto mb-6 max-w-2xl hyphens-auto text-justify font-body text-lg md:text-2xl leading-relaxed text-foreground/80">
                   {t.text}
                 </p>
                 <div className="font-display text-lg text-gradient-gold">{t.name}</div>
@@ -95,15 +95,15 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Dots */}
-        <div className="mt-6 flex justify-center gap-3">
+        <div className="mt-8 flex justify-center gap-4 md:gap-3">
           {testimonials.map((_, i) => (
             <button
               key={i}
               type="button"
               aria-label={`Show testimonial ${i + 1}`}
               onClick={() => setActive(i)}
-              className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                active === i ? "w-8 bg-primary" : "bg-primary/30"
+              className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
+                active === i ? "w-10 bg-primary" : "bg-primary/30"
               }`}
             />
           ))}
