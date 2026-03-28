@@ -72,6 +72,20 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
   }
+
+  /* Global Interactive Smoothness */
+  button, a, .clickable {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  button:hover, a.btn:hover {
+    @apply -translate-y-0.5 scale-[1.02];
+    filter: brightness(1.05);
+  }
+
+  button:active, a.btn:active {
+    @apply scale-[0.98];
+  }
 }
 
 @layer utilities {
@@ -102,6 +116,11 @@
 
   .gold-glow {
     box-shadow: 0 0 22px hsl(329 92% 54% / 0.25), 0 0 46px hsl(217 73% 47% / 0.14);
+    @apply transition-shadow duration-300;
+  }
+
+  .gold-glow:hover {
+    box-shadow: 0 0 30px hsl(329 92% 54% / 0.35), 0 0 55px hsl(217 73% 47% / 0.2);
   }
 
   .gold-glow-strong {
@@ -112,16 +131,32 @@
     background: hsl(0 0% 100% / 0.74);
     backdrop-filter: blur(20px);
     border: 1px solid hsl(224 52% 84% / 0.8);
+    @apply transition-all duration-300;
+  }
+
+  .glass:hover {
+    @apply -translate-y-1 shadow-lg border-primary/30;
   }
 
   .glass-strong {
     background: hsl(0 0% 100% / 0.86);
     backdrop-filter: blur(30px);
     border: 1px solid hsl(224 52% 84% / 0.95);
+    @apply transition-all duration-300;
+  }
+
+  .glass-strong:hover {
+    @apply -translate-y-1 shadow-xl border-primary/40;
   }
 
   .luxury-shadow {
     box-shadow: 0 20px 45px -18px hsl(224 41% 54% / 0.35), 0 0 24px hsl(329 92% 54% / 0.08);
+    @apply transition-all duration-300;
+  }
+
+  .luxury-shadow:hover {
+    box-shadow: 0 28px 55px -18px hsl(224 41% 54% / 0.45), 0 0 35px hsl(329 92% 54% / 0.15);
+    @apply -translate-y-1.5;
   }
 }
 

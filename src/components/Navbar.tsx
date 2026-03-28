@@ -39,9 +39,18 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-           <Link to="/" className="shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50" aria-label="PSS Makeup Studio home">
-            <img src={pssLogo} alt="" className="h-16 w-16 rounded-full md:h-[74px] md:w-[74px]" />
+          <Link to="/" className="shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50" aria-label="PSS Makeup Studio home">
+            <img src={pssLogo} alt="" className="h-14 w-14 rounded-full md:h-[74px] md:w-[74px]" />
           </Link>
+
+          {/* Mobile Academy Button */}
+          <button
+            type="button"
+            onClick={() => onNavItem("Academy")}
+            className="lg:hidden inline-flex items-center gap-1.5 rounded-full border border-primary/45 bg-primary/10 px-4 py-1.5 font-sans-serif text-[10px] uppercase tracking-[0.14em] text-primary transition-all active:scale-95 gold-glow"
+          >
+            Academy
+          </button>
           
           <div className="hidden lg:flex items-center gap-8">
             {navItems.map((item) => (
@@ -64,7 +73,7 @@ const Navbar = () => {
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden flex flex-col gap-1.5"
+            className="lg:hidden flex flex-col gap-1.5 p-2 shrink-0"
           >
             <span className={`w-6 h-px bg-primary transition-all ${mobileOpen ? "rotate-45 translate-y-[3.5px]" : ""}`} />
             <span className={`w-6 h-px bg-primary transition-all ${mobileOpen ? "opacity-0" : ""}`} />
