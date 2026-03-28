@@ -76,14 +76,14 @@ const HeroSection = () => {
     if (!cardsRevealed) return;
     const interval = setInterval(() => {
       setActiveCard((prev) => (prev + 1) % cards.length);
-    }, 4000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [cardsRevealed]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveBackground((prev) => (prev + 1) % heroBackgroundImages.length);
-    }, 4500);
+    }, 3200);
     return () => clearInterval(interval);
   }, []);
 
@@ -107,7 +107,7 @@ const HeroSection = () => {
           />
         ))}
       </div>
-      <div className="absolute inset-0 bg-background/55" />
+      <div className="absolute inset-0 bg-background/35" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(329_92%_54%/0.05)_0%,transparent_70%)]" />
       <GoldParticles />
 
