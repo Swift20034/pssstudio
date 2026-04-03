@@ -4,30 +4,11 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
 import Footer from "@/components/Footer";
-import SEO from "@/components/SEO";
-
-const ACADEMY_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
-  "name": "Pearl Bright Academy by PSS",
-  "description": "Professional Makeup & Hair Styling Course since 2009. 4-week intensive transformation programs.",
-  "location": {
-    "@type": "Place",
-    "name": "Bangalore Studio",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Bangalore"
-    }
-  }
-};
-import pearlBrightBanner from "@/assets/pearl-bright-academy-banner.png";
-import academyPromoImage from "@/assets/ACADEMY AWARDS/WhatsApp Image 2026-03-26 at 12.49.41 PM (2).jpeg";
-import pssLogo from "@/assets/pss-logo.png";
-import mainLogo from "@/assets/logo.png";
+import academyHeroLogo from "@/assets/logo.png";
+import academyValueImage from "@/assets/ACADEMY AWARDS/WhatsApp Image 2026-03-26 at 12.49.41 PM (2).jpeg";
 import academyTeachingVideo1 from "@/assets/ACADEMY AWARDS/WhatsApp Video 2026-03-26 at 12.49.59 PM.mp4";
 import academyTeachingVideo2 from "@/assets/ACADEMY AWARDS/WhatsApp Video 2026-03-26 at 12.49.59 PM (1).mp4";
 import academyTeachingVideo3 from "@/assets/ACADEMY AWARDS/WhatsApp Video 2026-03-26 at 12.49.59 PM (2).mp4";
-import academyTeachingVideo4 from "@/assets/ACADEMY AWARDS/WhatsApp Video 2026-03-28 at 9.19.54 AM.mp4";
 import {
   professionalMakeupHairArtistCourse,
   academyBestFor,
@@ -46,37 +27,6 @@ const academyTeachingVideos = [
   { src: academyTeachingVideo1, title: "Founder teaching session 1" },
   { src: academyTeachingVideo2, title: "Founder teaching session 2" },
   { src: academyTeachingVideo3, title: "Founder teaching session 3" },
-  { src: academyTeachingVideo4, title: "Srimathi N teaching live in academy class" },
-] as const;
-
-const academyProofMetrics = [
-  { label: "Course completion model looks", value: "4+", detail: "Portfolio-quality output" },
-  { label: "Hands-on training format", value: "100%", detail: "Practical studio sessions" },
-  { label: "Mentor style", value: "Founder-led", detail: "Direct pro guidance" },
-  { label: "Career focus", value: "Client-ready", detail: "Pricing and booking basics" },
-] as const;
-
-const academyJourneyWeeks = [
-  {
-    week: "Week 1",
-    title: "Pro Foundations",
-    summary: "Skin science, shade matching, hygiene protocols, and base perfection drills.",
-  },
-  {
-    week: "Week 2",
-    title: "Signature Makeup Methods",
-    summary: "HD, bridal, glossy, matte, and long-wear methods with camera-finish control.",
-  },
-  {
-    week: "Week 3",
-    title: "Hair + Draping Mastery",
-    summary: "Bridal buns, volume styling, accessories, and occasion-ready draping formats.",
-  },
-  {
-    week: "Week 4",
-    title: "Portfolio + Business Launch",
-    summary: "Model execution, social-ready portfolio output, pricing, and client conversion flow.",
-  },
 ] as const;
 
 const academyCertifiedStudentImageModules = import.meta.glob<string>(
@@ -97,16 +47,6 @@ const academyCertifiedStudentImages = sortAssetPaths(Object.keys(academyCertifie
   src: academyCertifiedStudentImageModules[path]!,
 }));
 
-const excludedCertificationImageNames = new Set([
-  "WhatsApp Image 2026-03-26 at 12.51.24 PM (3).jpeg",
-]);
-
-const academyCertifiedStudentImagesFiltered = academyCertifiedStudentImages.filter(({ path }) => {
-  const normalized = path.replace(/\\/g, "/");
-  const fileName = normalized.slice(normalized.lastIndexOf("/") + 1);
-  return !excludedCertificationImageNames.has(fileName);
-});
-
 const academyCertificationVideos = sortAssetPaths(Object.keys(academyCertifiedStudentVideoModules)).map((path) => ({
   path,
   src: academyCertifiedStudentVideoModules[path]!,
@@ -116,7 +56,6 @@ const excludedCertificationVideoNames = new Set([
   "WhatsApp Video 2026-03-26 at 12.49.59 PM (1).mp4",
   "WhatsApp Video 2026-03-26 at 12.49.59 PM (2).mp4",
   "WhatsApp Video 2026-03-26 at 12.49.59 PM.mp4",
-  "WhatsApp Video 2026-03-28 at 9.19.54 AM.mp4",
 ]);
 
 const academyCertificationVideosFiltered = academyCertificationVideos.filter(({ path }) => {
@@ -129,6 +68,7 @@ const AcademyPage = () => {
   const telHref = `tel:+91${summerOffersVenue.phone.replace(/\D/g, "")}`;
   const mailHref = `mailto:${summerOffersVenue.email}`;
   const course = professionalMakeupHairArtistCourse;
+  const summerFeeNote = `${formatRupee(course.fee)} is only a summer offer. This is not a fixed monthly fee and charges fluctuate by batch and module.`;
   const [selectedCertificationImage, setSelectedCertificationImage] = useState<{
     src: string;
     alt: string;
@@ -146,7 +86,7 @@ const AcademyPage = () => {
   }, []);
   const academyFastFacts = useMemo(
     () => [
-      { label: "Course fee", value: formatRupee(course.fee) },
+      { label: "Summer offer fee only", value: `${formatRupee(course.fee)} (seasonal)` },
       { label: "Duration", value: course.durationLabel },
       { label: "Schedule", value: course.schedule.regular },
       { label: "Flexible", value: course.schedule.flexible },
@@ -155,10 +95,10 @@ const AcademyPage = () => {
   );
   const certificationCollapsedLimit = isMobileViewport ? 2 : 4;
   const displayedCertificationImages = showAllCertificationImages
-    ? academyCertifiedStudentImagesFiltered
-    : academyCertifiedStudentImagesFiltered.slice(0, certificationCollapsedLimit);
-  const certificationHiddenCount = Math.max(0, academyCertifiedStudentImagesFiltered.length - certificationCollapsedLimit);
-  const showCertificationToggle = academyCertifiedStudentImagesFiltered.length > certificationCollapsedLimit;
+    ? academyCertifiedStudentImages
+    : academyCertifiedStudentImages.slice(0, certificationCollapsedLimit);
+  const certificationHiddenCount = Math.max(0, academyCertifiedStudentImages.length - certificationCollapsedLimit);
+  const showCertificationToggle = academyCertifiedStudentImages.length > certificationCollapsedLimit;
   const displayedCertificationVideos = showAllCertificationVideos
     ? academyCertificationVideosFiltered
     : academyCertificationVideosFiltered.slice(0, certificationCollapsedLimit);
@@ -167,19 +107,13 @@ const AcademyPage = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <SEO 
-        title="PSS Academy | Professional Makeup & Hair Styling Course in Bangalore"
-        description="Certified 4-week intensive professional makeup course in Bangalore. Learn celebrity-tier bridal & HD makeup from expert Srimathi N."
-        schema={ACADEMY_SCHEMA}
-      />
       <ScrollProgress />
       <Navbar />
       <main className="flex flex-col pt-[calc(5.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(6.5rem+env(safe-area-inset-top,0px))]">
         <section className="relative border-b border-border/20 py-10 md:py-14">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(43_100%_50%/0.09)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(43_76%_52%/0.09)_0%,transparent_60%)]" />
           <div className="container relative mx-auto px-6">
-            <div className="mt-2 rounded-2xl border border-border/35 bg-card/40 p-5 md:p-6 transition-transform transition-shadow duration-200 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(0,0,0,0.45)]">
-              <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
               <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
                 <span className="mb-3 inline-block rounded-full border border-primary/35 bg-primary/10 px-4 py-1.5 font-sans-serif text-[10px] uppercase tracking-[0.22em] text-primary">
                   {summerOffersVenue.name}
@@ -187,123 +121,70 @@ const AcademyPage = () => {
                 <h1 className="font-display text-3xl leading-tight text-balance md:text-5xl">
                   <span className="text-gradient-gold">Professional Makeup</span>
                   <br />
-                  <span className="text-foreground">& Academy Excellence</span>
+                  <span className="text-foreground">&amp; Hair Artist Academy</span>
                 </h1>
                 <p className="mt-4 max-w-2xl font-body text-sm leading-relaxed text-muted-foreground md:text-base">
                   Learn directly from working professionals at our Bangalore studio. This program is designed for
                   beginners and beauty artists who want premium bridal, HD, and portfolio-ready skills.
                 </p>
+                <div className="mt-4 inline-flex max-w-2xl rounded-xl border border-primary/40 bg-primary/10 px-4 py-2 font-sans-serif text-[11px] uppercase tracking-[0.13em] text-primary">
+                  Summer offer only: {formatRupee(course.fee)} (not a fixed monthly charge)
+                </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     to={{ pathname: "/", hash: "#book-now" }}
-                    className="academy-cta academy-cta-primary rounded-sm bg-gradient-gold px-7 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em] text-primary-foreground"
+                    className="rounded-sm bg-gradient-gold px-7 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em] text-primary-foreground transition-transform hover:scale-[1.02]"
                   >
                     Enquire now
                   </Link>
                   <a
                     href={telHref}
-                  className="academy-cta academy-cta-outline rounded-sm border border-primary/45 px-7 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em] text-primary gold-glow transition-transform duration-300 hover:-translate-y-0.5 hover:scale-[1.03]"
+                    className="rounded-sm border border-primary/45 px-7 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em] text-primary transition-colors hover:bg-primary/10"
                   >
                     Call {summerOffersVenue.phone}
                   </a>
                 </div>
               </motion.div>
+
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.06 }}
-                className="relative overflow-hidden rounded-2xl border border-primary/20 bg-card/35 luxury-shadow gold-glow-strong aspect-square flex items-center justify-center p-8 group"
+                className="overflow-hidden rounded-2xl border border-primary/20 bg-card/35 luxury-shadow"
               >
                 <img
-                  src={mainLogo}
-                  alt="PSS Makeup Studio"
-                  className="relative z-10 h-full w-full object-contain rounded-full border-2 border-primary/10 transition-transform duration-500 group-hover:scale-105"
+                  src={academyHeroLogo}
+                  alt="PSS Academy logo"
+                  className="h-full w-full object-cover"
                   loading="eager"
-                />
-                <motion.img
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.6 }}
-                  src={pssLogo}
-                  alt="Pearl Bright"
-                  className="absolute bottom-4 right-4 h-12 w-auto object-contain z-20"
+                  width={1200}
+                  height={800}
                 />
               </motion.div>
-              </div>
             </div>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {academyFastFacts.map((fact) => (
-                <div
-                  key={fact.label}
-                  className="rounded-xl border border-border/35 bg-muted/10 p-4 transition-transform transition-shadow duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_45px_rgba(0,0,0,0.35)]"
-                >
+                <div key={fact.label} className="rounded-xl border border-border/35 bg-muted/10 p-4">
                   <p className="font-sans-serif text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{fact.label}</p>
                   <p className="mt-1 font-display text-lg text-primary">{fact.value}</p>
                 </div>
               ))}
             </div>
-
-            <div className="mt-6 rounded-2xl border border-primary/20 bg-card/40 p-4 md:p-5">
-              <p className="mb-3 font-sans-serif text-[10px] uppercase tracking-[0.22em] text-primary">Academy confidence indicators</p>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {academyProofMetrics.map((metric) => (
-                  <div
-                    key={metric.label}
-                    className="rounded-xl border border-border/35 bg-background/60 p-4 transition-transform transition-shadow duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_45px_rgba(0,0,0,0.35)]"
-                  >
-                    <p className="font-display text-xl text-gradient-gold md:text-2xl">{metric.value}</p>
-                    <p className="mt-1 font-sans-serif text-[10px] uppercase tracking-[0.14em] text-foreground/80">{metric.label}</p>
-                    <p className="mt-1 font-body text-xs text-muted-foreground">{metric.detail}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="relative border-b border-border/20 py-14 md:py-20">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(43_100%_50%/0.08)_0%,transparent_60%)]" />
-          <div className="container relative mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5 }}
-              className="mx-auto mb-10 max-w-3xl text-center"
-            >
-              <span className="mb-3 block font-sans-serif text-xs uppercase tracking-[0.28em] text-primary">4-week transformation</span>
-              <h2 className="font-display text-3xl text-balance md:text-4xl">
-                <span className="text-gradient-gold">Your academy journey,</span> mapped week by week
-              </h2>
-              <p className="mt-4 font-body text-sm leading-relaxed text-muted-foreground md:text-base">
-                This is not random classes. Every week has a clear output so students move from learner mode to
-                confident client execution with structure.
+            <div className="mt-3 rounded-xl border border-primary/40 bg-primary/10 px-4 py-3">
+              <p className="font-sans-serif text-[10px] uppercase tracking-[0.16em] text-primary">
+                Important pricing update
               </p>
-            </motion.div>
-
-            <div className="grid gap-4 lg:grid-cols-4">
-              {academyJourneyWeeks.map((item, i) => (
-                <motion.div
-                  key={item.week}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-70px" }}
-                  transition={{ duration: 0.45, delay: Math.min(i * 0.06, 0.2) }}
-                  className="relative rounded-2xl border border-primary/25 bg-card/35 p-5 luxury-shadow transition-transform transition-shadow duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_55px_rgba(0,0,0,0.4)]"
-                >
-                  <div className="mb-4 inline-flex rounded-full border border-primary/35 bg-primary/10 px-3 py-1 font-sans-serif text-[10px] uppercase tracking-[0.2em] text-primary">
-                    {item.week}
-                  </div>
-                  <h3 className="font-display text-xl text-foreground">{item.title}</h3>
-                  <p className="mt-3 font-body text-sm leading-relaxed text-muted-foreground">{item.summary}</p>
-                </motion.div>
-              ))}
+              <p className="mt-1 font-body text-xs text-foreground/90 md:text-sm">{summerFeeNote}</p>
             </div>
+            <p className="mt-3 font-body text-xs text-muted-foreground md:text-sm">
+              {summerFeeNote}
+            </p>
           </div>
         </section>
 
         <section className="relative overflow-hidden border-b border-border/20 py-14 md:py-20">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_100%_0%,hsl(43_100%_50%/_0.07),transparent_55%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_100%_0%,hsl(43_76%_52%/_0.07),transparent_55%)]" />
           <div className="container relative mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -332,8 +213,8 @@ const AcademyPage = () => {
                 className="overflow-hidden rounded-2xl border border-primary/25 bg-card/30 luxury-shadow"
               >
                 <img
-                  src={academyPromoImage}
-                  alt="Pearl Bright Academy student work and training environment"
+                  src={academyValueImage}
+                  alt="Academy classroom and award moment"
                   className="w-full object-cover object-center"
                   loading="lazy"
                   width={1200}
@@ -348,8 +229,11 @@ const AcademyPage = () => {
                 transition={{ duration: 0.5, delay: 0.06 }}
                 className="flex flex-col gap-8"
               >
-                <div className="rounded-2xl border border-border/40 bg-muted/15 p-6 md:p-8 transition-transform transition-shadow duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_55px_rgba(0,0,0,0.4)]">
+                <div className="rounded-2xl border border-border/40 bg-muted/15 p-6 md:p-8">
                   <h3 className="font-display text-lg text-gradient-gold md:text-xl">Service and academy pricing</h3>
+                  <p className="mt-2 inline-flex rounded-full border border-primary/35 bg-primary/10 px-3 py-1 font-sans-serif text-[10px] uppercase tracking-[0.14em] text-primary">
+                    {formatRupee(course.fee)} = summer offer only
+                  </p>
                   <p className="mt-2 font-body text-sm text-muted-foreground">
                     Transparent pricing helps students understand real salon economics while building service packages.
                   </p>
@@ -357,7 +241,7 @@ const AcademyPage = () => {
                     {pearlBrightSpecialistRates.map((row) => (
                       <li
                         key={row.label}
-                        className="flex items-center justify-between gap-4 py-3 font-body text-sm text-foreground/90 first:pt-0 transition-colors hover:text-primary"
+                        className="flex items-center justify-between gap-4 py-3 font-body text-sm text-foreground/90 first:pt-0"
                       >
                         <span>{row.label}</span>
                         <span className="shrink-0 font-display text-primary">{formatRupee(row.price)}</span>
@@ -366,7 +250,7 @@ const AcademyPage = () => {
                   </ul>
                 </div>
 
-                <div className="rounded-2xl border border-primary/30 bg-primary/5 p-6 md:p-7 transition-transform transition-shadow duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_20px_55px_rgba(0,0,0,0.4)]">
+                <div className="rounded-2xl border border-primary/30 bg-primary/5 p-6 md:p-7">
                   <p className="font-sans-serif text-[10px] uppercase tracking-[0.2em] text-primary">Contact academy desk</p>
                   <p className="mt-2 font-body text-foreground/90">{summerOffersVenue.location}</p>
                   <a
@@ -414,7 +298,7 @@ const AcademyPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-70px" }}
                   transition={{ duration: 0.45, delay: Math.min(i * 0.06, 0.24) }}
-                  className="rounded-xl border border-border/35 bg-muted/10 p-5 md:p-6 transition-transform transition-shadow duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_55px_rgba(0,0,0,0.4)]"
+                  className="rounded-xl border border-border/35 bg-muted/10 p-5 md:p-6"
                 >
                   <h3 className="font-display text-xl text-gradient-gold">{track.title}</h3>
                   <ul className="mt-4 grid gap-2">
@@ -431,7 +315,7 @@ const AcademyPage = () => {
         </section>
 
         <section className="relative border-b border-border/20 py-14 md:py-20">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(43_100%_50%/0.05)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(43_76%_52%/0.05)_0%,transparent_60%)]" />
           <div className="container relative mx-auto px-6">
             <div className="grid items-start gap-8 lg:grid-cols-2">
               <motion.div
@@ -439,7 +323,7 @@ const AcademyPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-70px" }}
                 transition={{ duration: 0.5 }}
-                className="rounded-2xl border border-primary/25 bg-primary/5 p-6 md:p-8 transition-transform transition-shadow duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_55px_rgba(0,0,0,0.4)]"
+                className="rounded-2xl border border-primary/25 bg-primary/5 p-6 md:p-8"
               >
                 <p className="font-sans-serif text-[10px] uppercase tracking-[0.24em] text-primary">Who can join</p>
                 <h3 className="mt-2 font-display text-2xl text-foreground">Perfect for aspiring and working artists</h3>
@@ -457,7 +341,7 @@ const AcademyPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-70px" }}
                 transition={{ duration: 0.5, delay: 0.04 }}
-                className="rounded-2xl border border-border/35 bg-card/30 p-6 md:p-8 transition-transform transition-shadow duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_55px_rgba(0,0,0,0.4)]"
+                className="rounded-2xl border border-border/35 bg-card/30 p-6 md:p-8"
               >
                 <p className="font-sans-serif text-[10px] uppercase tracking-[0.24em] text-primary">Career outcomes</p>
                 <h3 className="mt-2 font-display text-2xl text-foreground">Where this course can take you</h3>
@@ -468,9 +352,12 @@ const AcademyPage = () => {
                     </li>
                   ))}
                 </ul>
+                <p className="mt-4 rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 font-body text-xs text-foreground/85">
+                  Note: {summerFeeNote}
+                </p>
                 <Link
                   to={{ pathname: "/", hash: "#book-now" }}
-                  className="academy-cta academy-cta-primary mt-6 inline-flex rounded-sm bg-gradient-gold px-6 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em] text-primary-foreground"
+                  className="mt-6 inline-flex rounded-sm bg-gradient-gold px-6 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em] text-primary-foreground transition-transform hover:scale-[1.02]"
                 >
                   Reserve your seat
                 </Link>
@@ -480,7 +367,7 @@ const AcademyPage = () => {
         </section>
 
         <section className="relative border-b border-border/20 py-14 md:py-20">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,hsl(43_100%_50%/0.05)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,hsl(43_76%_52%/0.05)_0%,transparent_60%)]" />
           <div className="container relative mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -501,7 +388,7 @@ const AcademyPage = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-4 lg:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-3">
               {academyTeachingVideos.map((video, i) => (
                 <motion.div
                   key={video.src}
@@ -513,7 +400,7 @@ const AcademyPage = () => {
                 >
                   <video
                     src={video.src}
-                    className="aspect-[3/4] w-full bg-background object-cover"
+                    className="aspect-[3/4] w-full bg-black object-cover"
                     controls
                     preload="metadata"
                     playsInline
@@ -524,9 +411,9 @@ const AcademyPage = () => {
           </div>
         </section>
 
-        {academyCertifiedStudentImagesFiltered.length > 0 && (
+        {academyCertifiedStudentImages.length > 0 && (
           <section className="relative border-b border-border/20 py-14 md:py-20">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(43_100%_50%/0.05)_0%,transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(43_76%_52%/0.05)_0%,transparent_60%)]" />
             <div className="container relative mx-auto px-6">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
@@ -604,7 +491,7 @@ const AcademyPage = () => {
                       >
                         <video
                           src={video.src}
-                          className="h-full w-full bg-background object-cover"
+                          className="h-full w-full bg-black object-cover"
                           controls
                           preload="metadata"
                           playsInline
@@ -630,42 +517,6 @@ const AcademyPage = () => {
             </div>
           </section>
         )}
-
-        <section className="relative border-b border-border/20 py-12 md:py-14">
-          <div className="absolute inset-0 bg-[linear-gradient(120deg,hsl(43_100%_50%/0.11)_0%,hsl(43_100%_30%/0.11)_55%,hsl(43_100%_20%/0.11)_100%)]" />
-          <div className="container relative mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-70px" }}
-              transition={{ duration: 0.5 }}
-              className="rounded-2xl border border-primary/25 bg-background/80 p-6 text-center backdrop-blur md:p-8"
-            >
-              <p className="font-sans-serif text-[10px] uppercase tracking-[0.24em] text-primary">Limited batch advantage</p>
-              <h2 className="mt-2 font-display text-2xl text-balance md:text-4xl">
-                Train in smaller batches, <span className="text-gradient-gold">get deeper founder attention</span>
-              </h2>
-              <p className="mx-auto mt-3 max-w-3xl font-body text-sm text-muted-foreground md:text-base">
-                Pearl Bright Academy focuses on quality over crowd. Smaller class groups mean better correction,
-                stronger practical confidence, and faster real-world readiness.
-              </p>
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-                <Link
-                  to={{ pathname: "/", hash: "#book-now" }}
-                  className="academy-cta academy-cta-primary rounded-sm bg-gradient-gold px-7 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em] text-primary-foreground"
-                >
-                  Apply for next batch
-                </Link>
-                <a
-                  href={mailHref}
-                  className="academy-cta academy-cta-outline academy-cta-email rounded-sm border border-primary/45 px-7 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em]"
-                >
-                  Email academy desk
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </section>
 
         <section className="relative py-14 md:py-20">
           <div className="container mx-auto px-6">
@@ -701,17 +552,18 @@ const AcademyPage = () => {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Link
                 to={{ pathname: "/", hash: "#book-now" }}
-                className="academy-cta academy-cta-primary rounded-sm bg-gradient-gold px-8 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em] text-primary-foreground"
+                className="rounded-sm bg-gradient-gold px-8 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em] text-primary-foreground transition-transform hover:scale-[1.02]"
               >
                 Start your journey
               </Link>
               <Link
                 to="/"
-                className="academy-cta academy-cta-outline rounded-sm border border-border/40 px-8 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em] text-muted-foreground hover:border-primary/40 hover:text-primary"
+                className="rounded-sm border border-border/40 px-8 py-3 font-sans-serif text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
               >
                 Back to home
               </Link>
             </div>
+            <p className="mt-5 text-center font-body text-xs text-muted-foreground md:text-sm">{summerFeeNote}</p>
           </div>
         </section>
       </main>
